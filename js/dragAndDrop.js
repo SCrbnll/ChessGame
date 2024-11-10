@@ -1,12 +1,17 @@
-export function addDragAndDropListeners() {
+export function addDragAndDropListeners(playerColor) {
     const pieces = document.querySelectorAll('.draggable');
 
     pieces.forEach(piece => {
         piece.setAttribute('draggable', true);
-
         piece.addEventListener('dragstart', (event) => {
-            event.dataTransfer.setData('text/plain', event.target.id);
-            console.log("Pieza arrastrada:", event.target.id); 
+            const draggedPieceColor = event.target.getAttribute('data-color'); 
+
+            if (draggedPieceColor !== playerColor) {
+                event.preventDefault();  
+                console.error("No puedes mover esta pieza porque no es tu color.");
+            } else {
+                event.dataTransfer.setData('text/plain', event.target.id); 
+            }
         });
 
         piece.addEventListener('dragover', (event) => {
@@ -15,7 +20,6 @@ export function addDragAndDropListeners() {
 
         piece.addEventListener('drop', (event) => {
             event.preventDefault();
-
             const draggedPieceId = event.dataTransfer.getData('text/plain');
             const draggedPiece = document.getElementById(draggedPieceId); 
 
@@ -27,7 +31,7 @@ export function addDragAndDropListeners() {
             const targetCell = event.target.closest('td'); 
 
             if (targetCell && targetCell !== draggedPiece.parentElement) {
-                targetCell.appendChild(draggedPiece); 
+                targetCell.appendChild(draggedPiece);
                 console.log(`Pieza movida a ${targetCell.id}`); 
             }
         });

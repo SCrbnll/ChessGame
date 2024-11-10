@@ -44,6 +44,7 @@ function createPiece(color, pieces, index, row) {
 	const piece = document.createElement("img");
 	piece.src = `assets/${color}/${pieces[index]}.png`;
 	piece.classList.add("draggable");
+    piece.setAttribute('data-color', color); 
 
 	const pieceId = `${rowName.charAt(index)}${row}-${color}-${pieces[index]}`;
 	piece.id = pieceId; 
