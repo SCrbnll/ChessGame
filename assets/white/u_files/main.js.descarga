@@ -1,0 +1,155 @@
+'use strict'
+const rowName='ABCDEFGH';  
+const board = document.getElementById('board');
+
+window.addEventListener('load', () => {
+    renderTable();
+    // addDragAndDropListeners();
+	clearScores();
+});
+
+
+function renderTable() {
+	let tabla='';
+	for (let i=8; i>0; i--) {
+		tabla+=`<tr><th>${i}</th>`;
+		for (let j=0; j<8; j++) {
+			tabla+=`
+				<td id="${rowName.charAt(j)+i}" class="${((i+j)%2)?'black':'white'}"></td>`;
+		}
+		tabla+='</tr><tr><th></th>';
+	}
+	for (let i=0;i<8;i++) {
+		tabla+=`<th>${rowName.charAt(i)}</th>`;
+	}
+	tabla+='</tr>';
+
+	board.innerHTML=tabla;
+}
+
+function renderFigures(){
+    document.getElementById('A1')
+}
+
+function calcTargets(position) {
+	const column = rowName.indexOf(position.charAt(0)) + 1;
+	const row = Number(position.charAt(1));
+	let targets = [];
+	targets.push([column+2, row+1]);
+	targets.push([column+2, row-1]);
+	targets.push([column-2, row+1]);
+	targets.push([column-2, row-1]);
+	targets.push([column+1, row+2]);
+	targets.push([column+1, row-2]);
+	targets.push([column-1, row+2]);
+	targets.push([column-1, row-2]);
+	return clearTargets(targets).map(cell => 
+		rowName.charAt(cell[0]-1) + cell[1]);
+}
+
+function clearTargets(targets) {
+	return targets.filter(cell => {
+		const column = cell[0];
+		const row = cell[1];
+		return (column >=1 && column <=8
+			&& row >= 1 && row <= 8)
+	})
+}
+
+function highlightTargets(position) {
+    const targets = calcTargets(position);
+    targets.forEach(target => {
+        const cell = document.getElementById(target);
+        if (cell) cell.classList.add('dropable');
+    });
+}
+
+function clearDropableTargets() {
+	document.querySelectorAll('.dropable').forEach(cell => {
+        cell.classList.remove('dropable');
+    });
+}
+
+function addDragAndDropListeners() {
+	const caballo = document.getElementById('caballo');
+	caballo.addEventListener('dragstart', (event) => {
+		event.dataTransfer.setData('text/plain', event.target.id); 
+	})
+
+	document.querySelectorAll('.dropable').forEach(cell => {
+		cell.addEventListener('dragover', (event) => {
+			event.preventDefault();
+		   }
+		)
+		cell.addEventListener('drop', (event) => {
+		 event.preventDefault();
+		 const caballoId = event.dataTransfer.getData('text/plain');
+		 const caballo = document.getElementById(caballoId);
+
+			if (event.target.classList.contains('dropable')) {
+				event.target.appendChild(caballo);
+				moveCount++; 
+                if (event.target.classList.contains('final')) {
+                    endGame();
+                } else {
+                    resetTargets();
+                    highlightTargets(event.target.id);
+                    addDragAndDropListeners();
+                }
+			}
+	 	});
+	})
+}
+
+function resetTargets() {
+    document.querySelectorAll('.dropable').forEach(cell => {
+        cell.classList.remove('dropable');
+        cell.replaceWith(cell.cloneNode(true));
+    });
+}
+
+function clearScores() {
+	document.getElementsByClassName('btn-restart').item(0).addEventListener('click', () => {
+		moveCount = 0;
+		totalPlayedGames = 0;
+        bestGame = { moves: null, count: 0 };
+        worstGame = { moves: 0, count: 0 };
+		document.getElementById('played-text').textContent = 0;
+		document.getElementById('best-mov-text').textContent = 0;
+		document.getElementById('best-num-text').textContent = 0;
+		document.getElementById('worst-mov-text').textContent = 0;
+		document.getElementById('worst-num-text').textContent = 0;
+	})
+}
+
+function restartGame() {
+	moveCount = 0;
+	renderTable();
+    highlightTargets(initialPosition); 
+    addDragAndDropListeners();
+}
+
+function endGame() {
+    totalPlayedGames++;
+    
+    if (!bestGame.moves || moveCount < bestGame.moves) {
+        bestGame = { moves: moveCount, count: 1 };
+    } else if (moveCount === bestGame.moves) {
+        bestGame.count++;
+    }
+
+    if (moveCount > worstGame.moves) {
+        worstGame = { moves: moveCount, count: 1 };
+    } else if (moveCount === worstGame.moves) {
+        worstGame.count++;
+    }
+
+    document.getElementById('played-text').textContent = totalPlayedGames;
+    document.getElementById('best-mov-text').textContent = bestGame.moves;
+    document.getElementById('best-num-text').textContent = bestGame.count;
+    document.getElementById('worst-mov-text').textContent = worstGame.moves;
+    document.getElementById('worst-num-text').textContent = worstGame.count;
+
+	clearDropableTargets();
+	restartGame();
+}

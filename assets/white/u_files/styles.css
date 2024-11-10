@@ -1,0 +1,176 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    background: linear-gradient(to bottom, #000000, #470068);
+    color: #ffffff;
+    background-attachment: fixed; 
+}
+
+.hidden {
+    display: none;
+}
+
+/* Estilos para la pantalla de bienvenida */
+#app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+#player-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#player-form label, #player-form input, #player-form select, .btn-start {
+    font-family: gameFont, sans-serif;
+    font-size: 1.2em;
+    color: #ffffff;
+}
+
+#player-form input, #player-form select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #0046af;
+    background: #1f1f1f;
+    color: #ffffff;
+    width: 200px;
+}
+
+.btn-start {
+    background: #0046af80;
+    border: 3px solid #0046af80;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.btn-start:hover {
+    background: #00348f;
+}
+
+/* Estilos para el tablero y menú lateral */
+.main-container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.board-panel {
+    display: flex;
+    flex-flow: row wrap;
+    justify-self: start;
+    transform: scale(1.1);
+    margin-top: 30px;
+}
+
+#board {
+    border-collapse: collapse;
+}
+
+.white, .black {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+}
+
+.white {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+.black {
+    background-color: #000000;
+    border: 1px solid #1f1f1f;
+}
+
+.dropable {
+    background-color: var(--highlight-color);
+    opacity: 50%;
+}
+
+.sidebar {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 70, 175, 0.8);
+    border: 3px solid #0046af;
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+.panel-score {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.player-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.player-info h2 {
+    font-size: 1.6em;
+    margin: 10px 0;
+}
+
+.data-info {
+    font-size: 1.4em;
+    margin: 5px 0;
+}
+
+/* Marcador y Botones */
+.score {
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    border: 3px solid #0046af;
+    border-radius: 5px;
+    background: #00348f;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.btn-restart, .btn-clear {
+    background: #0046af80;
+    border: 3px solid #0046af;
+    border-radius: 5px;
+    font-family: gameFont;
+    font-size: 1.2em;
+    color: #ffffff;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-restart:hover, .btn-clear:hover {
+    background: #00348f;
+    color: #b1b1b1;
+}
+
+/* Temporizador */
+#player-time, #ai-time-text {
+    font-weight: bold;
+    font-size: 1.6em;
+    color: #ffff99;
+}
