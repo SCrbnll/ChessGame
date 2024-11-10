@@ -4,13 +4,14 @@
     box-sizing: border-box;
 }
 :root {
-    background: linear-gradient(to bottom, #000000, #470068);
+	background: linear-gradient(to bottom, #000000, #470068);
     color: #ffffff;
     background-attachment: fixed; 
+	overflow-y: hidden;
 }
 
-.hiddenSection {
-    display: none;
+.hidden {
+    display: none !important;
 }
 
 /* Form Styles */	
@@ -84,8 +85,8 @@
 }
 
 #start-game {
-    background: #0046af80;
-    border: 2px solid #0046af80;
+    background: #002c6e80;
+    border: 2px solid #002c6e80;
     color: #ffffff;
     border-radius: 5px;
     padding: 10px 20px;
@@ -97,7 +98,7 @@
 }
 
 #start-game:hover {
-    background: #00348f;
+    background: #002c6e;
 }
 
 /* Game Styles */
@@ -134,7 +135,7 @@
 	font-family: gameFont;
 	font-size: 3em;
     width: 100%;
-	margin-top: 40px;
+	margin-top: 20px;
     padding-inline: 5%;
 }
   
@@ -170,6 +171,18 @@
     width: 100%;
 }
 
+.player-data {
+    display: flex;
+    align-items: center; 
+	justify-content: center;
+}
+
+.pawnImage {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px; 
+}
+
 .player-info {
     text-align: center;
     margin-bottom: 20px;
@@ -185,23 +198,15 @@
     margin: 5px 0;
 }
 
-.score {
-    text-align: center;
-    width: 100%;
-    padding: 10px;
-    border: 3px solid #0046af;
-    border-radius: 5px;
-    background: #00348f;
-}
-
 .buttons {
     display: flex;
     flex-direction: column;
+	margin-top: 70%;
     gap: 15px;
     width: 100%;
 }
 
-.btn-restart, .btn-clear {
+.btn-restart, .btn-new {
     background: #0046af80;
     border: 3px solid #0046af;
     border-radius: 5px;
@@ -213,7 +218,7 @@
     transition: background 0.3s;
 }
 
-.btn-restart:hover, .btn-clear:hover {
+.btn-restart:hover, .btn-new:hover {
     background: #00348f;
     color: #b1b1b1;
 }

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div id="welcome-screen" class="welcomeScreen, hiddenSection">
+    <div id="welcome-screen" class="welcomeScreen">
         <h2>Bienvenido al Ajedrez</h2>
         <label for="player-name">Nombre del Jugador:</label>
         <input type="text" id="player-name" placeholder="Introduce tu nombre">
@@ -30,7 +30,7 @@
         <button id="start-game">Comenzar Partida</button>
     </div>
 
-    <div id="game-screen" class="main-container screen hidden">
+    <div id="game-screen" class="main-container hidden">
         <h1 class="main-title">Chess Game<strong id="posicion"></strong></h1>
 
         <div class="board-panel">
@@ -40,23 +40,22 @@
         <aside class="sidebar">
             <div class="panel-score">
                 <div class="player-info">
-                    <h2>Jugador</h2>
+                    <div class="player-data">
+                        <img src="/assets/white/pawn.png" alt="Peón Blanco" class="pawnImage" id="player-pawn">
+                        <h2 id="player-name-heading">Jugador</h2>
+                    </div>
                     <span class="data-info" id="player-text">Tiempo: <span id="player-time">10:00</span></span>
-                    <br>
-                    <h2>Máquina</h2>
+                    <br><br><br>
+                    <div class="player-data">
+                        <img src="/assets/white/pawn.png" alt="Peón Blanco" class="pawnImage" id="ai-pawn">
+                        <h2>Máquina</h2>
+                    </div>
                     <span class="data-info" id="ai-time">Tiempo: <span id="ai-time-text">10:00</span></span>
                 </div>
 
-                <div class="score">
-                    <h2>Marcador</h2>
-                    <span class="data-info" id="win-ply-text">0</span> Jugador
-                    <br>
-                    <span class="data-info" id="win-ia-text">0</span> Máquina
-                </div>
-
                 <div class="buttons">
-                    <button class="btn-clear">Borrar marcador</button>
-                    <button class="btn-restart">Reiniciar partida</button>
+                    <button id="btnRestart" class="btn-restart">Reiniciar partida</button>
+                    <button id="btnNew" class="btn-new">Nueva partida</button>
                 </div>
             </div>
         </aside>
