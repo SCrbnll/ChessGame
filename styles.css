@@ -227,3 +227,8 @@
     font-size: 1.6em;
     color: #ffff99;
 }
+
+/* Movements Styles */
+.valid-move {
+    background-color: rgba(0, 255, 0, 0.5); 
+}
