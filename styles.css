@@ -109,13 +109,11 @@
 }
 
 .white {
-	background-color: #ffffff;
-	border: 5px solid #e0e0e0;
+	background-image: url('assets/wood-white.png');
 }
 
 .black {
-	background-color: #000000;
-	border: 5px solid #1f1f1f;
+	background-image : url('assets/wood-black.png');
 }
 
 .dropable {
@@ -194,6 +192,7 @@
 }
 
 .data-info {
+	color: #a7a7a7;
     font-size: 1.4em;
     margin: 5px 0;
 }
